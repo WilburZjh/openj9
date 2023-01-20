@@ -22,12 +22,36 @@
 -->
 <playlist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../TKG/playlist.xsd">
     <test>
-        <testCaseName>cmdLineTester_fips</testCaseName>
+        <testCaseName>cmdLineTester_fips_providers</testCaseName>
         <command>
             $(JAVA_COMMAND) $(JVM_OPTIONS) -Xdump \
             -DTEST_RESROOT=$(Q)$(TEST_RESROOT)$(D)$(Q) -DRESJAR=$(CMDLINETESTER_RESJAR) \
-            -DEXE=$(SQ)$(JAVA_COMMAND) $(JVM_OPTIONS)$(SQ) -jar $(CMDLINETESTER_JAR) -config $(Q)$(TEST_RESROOT)$(D)fips.xml$(Q) \
+            -DEXE=$(SQ)$(JAVA_COMMAND) $(JVM_OPTIONS)$(SQ) -jar $(CMDLINETESTER_JAR) -config $(Q)$(TEST_RESROOT)$(D)fips_providers.xml$(Q) \
             -explainExcludes -nonZeroExitWhenError; \
+            $(TEST_STATUS)
+        </command>
+        <platformRequirements>os.linux,arch.x86,bits.64</platformRequirements>
+        <features>
+            <feature>FIPS:required</feature>
+        </features>
+        <levels>
+            <level>sanity</level>
+        </levels>
+        <groups>
+            <group>functional</group>
+        </groups>
+        <impls>
+            <impl>openj9</impl>
+        </impls>
+    </test>
+    <test>
+        <testCaseName>cmdLineTester_fips_keyextractimport</testCaseName>
+        <command>
+            $(JAVA_COMMAND) $(JVM_OPTIONS) -Xdump \
+            -DSCRIPPATH=$(TEST_RESROOT)$(D)fips_keyExtractImport_script.sh -DTEST_RESROOT=$(TEST_RESROOT) \
+            -DJAVA_COMMAND=$(JAVA_COMMAND) -DJVM_OPTIONS=$(SQ)$(JVM_OPTIONS)$(SQ) \
+            -jar $(CMDLINETESTER_JAR) -config $(Q)$(TEST_RESROOT)$(D)fips_keyExtractImport.xml$(Q) \
+            -explainExcludes -xids all,$(PLATFORM),$(VARIATION) -nonZeroExitWhenError; \
             $(TEST_STATUS)
         </command>
         <platformRequirements>os.linux,arch.x86,bits.64</platformRequirements>

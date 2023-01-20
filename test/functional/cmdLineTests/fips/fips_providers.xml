@@ -17,7 +17,7 @@
   OpenJDK Assembly Exception [2].
 
   [1] https://www.gnu.org/software/classpath/license.html
-  [2] https://openjdk.org/legal/assembly-exception.html
+  [2] http://openjdk.java.net/legal/assembly-exception.html
 
   SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
@@ -33,25 +33,6 @@
     <output type="success" caseSensitive="no" regex="no">Verify providers in FIPS mode COMPLETED</output>
     <output type="required" caseSensitive="yes" regex="no">Verify providers</output>
     <output type="failure" caseSensitive="yes" regex="no">Could not find provider</output>
-    <output type="failure" caseSensitive="yes" regex="no">ERR</output>
-  </test>
-
-  <test id="Import secret keys in FIPS mode">
-    <command>$EXE$ $CLASSPATH$ org.openj9.test.fips.FIPSKeyExtractImport encrypt</command>
-    <output type="success" caseSensitive="no" regex="no">Import secret key in FIPS mode test COMPLETED</output>
-    <output type="failure" caseSensitive="yes" regex="no">Import secret key in FIPS mode test FAILED</output>
-    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
-    <output type="failure" caseSensitive="yes" regex="no">Could not create key</output>
-    <output type="failure" caseSensitive="yes" regex="no">No such provider</output>
-    <output type="failure" caseSensitive="yes" regex="no">ERR</output>
-  </test>
-
-  <test id="Extract RSA keys in FIPS mode">
-    <command>$EXE$ $CLASSPATH$ org.openj9.test.fips.FIPSKeyExtractImport extractkey</command>
-    <output type="success" caseSensitive="no" regex="no">Extract RSA keys in FIPS mode test COMPLETED</output>
-    <output type="failure" caseSensitive="yes" regex="no">Extract RSA keys in FIPS mode test FAILED</output>
-    <output type="failure" caseSensitive="yes" regex="no">Could not create key</output>
-    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
     <output type="failure" caseSensitive="yes" regex="no">ERR</output>
   </test>
 </suite>

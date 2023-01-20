@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!--
+  Copyright (c) 2022, 2022 IBM Corp. and others
+
+  This program and the accompanying materials are made available under
+  the terms of the Eclipse Public License 2.0 which accompanies this
+  distribution and is available at https://www.eclipse.org/legal/epl-2.0/
+  or the Apache License, Version 2.0 which accompanies this distribution and
+  is available at https://www.apache.org/licenses/LICENSE-2.0.
+
+  This Source Code may also be made available under the following
+  Secondary Licenses when the conditions for such availability set
+  forth in the Eclipse Public License, v. 2.0 are satisfied: GNU
+  General Public License, version 2 with the GNU Classpath
+  Exception [1] and GNU General Public License, version 2 with the
+  OpenJDK Assembly Exception [2].
+
+  [1] https://www.gnu.org/software/classpath/license.html
+  [2] https://openjdk.org/legal/assembly-exception.html
+
+  SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
+-->
+
+<!DOCTYPE suite SYSTEM "cmdlinetester.dtd">
+
+<suite id="J9 FIPS Command-Line Option Tests" timeout="300">
+  <variable name="MAINCLASS_KEY_EXTRACT_IMPORT" value="org.openj9.test.fips.FIPSKeyExtractImport" />
+
+  <test id="Import secret keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ importSecret</command>
+    <output type="success" caseSensitive="no" regex="no">Import secret key in FIPS mode test COMPLETED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Import secret key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Encrypt a message by secret key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Decrypt a message by secret key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+    <output type="failure" caseSensitive="yes" regex="no">Could not create key</output>
+    <output type="failure" caseSensitive="yes" regex="no">No such provider</output>
+  </test>
+
+  <test id="Import RSA keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ importRSA</command>
+    <output type="success" caseSensitive="no" regex="no">Import RSA key in FIPS mode test COMPLETED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Import RSA key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not load key from PKCS12 keystore</output>
+    <output type="failure" caseSensitive="yes" regex="no">Decrypted Message does not match original message</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+  </test>
+
+  <test id="Import EC keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ importEC</command>
+    <output type="success" caseSensitive="no" regex="no">Verified</output>
+    <output type="failure" caseSensitive="yes" regex="no">Does not verify</output>
+    <output type="failure" caseSensitive="yes" regex="no">Import EC key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not load key from PKCS12 keystore</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not sign through private key</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not verify through public key</output>
+    <output type="failure" caseSensitive="yes" regex="no">Algorithm is not supported now</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+  </test>
+
+  <test id="Import EC keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ importRSASignature</command>
+    <output type="success" caseSensitive="no" regex="no">Verified</output>
+    <output type="failure" caseSensitive="yes" regex="no">Does not verify</output>
+    <output type="failure" caseSensitive="yes" regex="no">Import RSA key in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not load key from PKCS12 keystore</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not sign through private key</output>
+    <output type="failure" caseSensitive="yes" regex="no">Can not verify through public key</output>
+    <output type="failure" caseSensitive="yes" regex="no">Algorithm is not supported now</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+  </test>
+
+  <test id="Export RSA keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ exportRSA</command>
+    <output type="success" caseSensitive="no" regex="no">Extract RSA keys in FIPS mode test COMPLETED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Extract RSA keys in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Could not create key</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+  </test>
+
+  <test id="Export EC keys in FIPS mode">
+    <command>bash $SCRIPPATH$ $TEST_RESROOT$ $JAVA_COMMAND$ $JVM_OPTIONS$ $MAINCLASS_KEY_EXTRACT_IMPORT$ exportEC</command>
+    <output type="success" caseSensitive="no" regex="no">Extract EC keys in FIPS mode test COMPLETED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Extract EC keys in FIPS mode test FAILED</output>
+    <output type="failure" caseSensitive="yes" regex="no">Could not create key</output>
+    <output type="failure" caseSensitive="yes" regex="no">incorrect parameters</output>
+  </test>
+</suite>
