@@ -3886,6 +3886,15 @@ processVMArgsFromFirstToLast(J9JavaVM * vm)
 	}
 
 	{
+		IDATA disableCRIUSecProvider = FIND_AND_CONSUME_VMARG(EXACT_MATCH, VMOPT_XXDISABLECRIUSECPROVIDER, NULL);
+		if(disableCRIUSecProvider >= 0) {
+			if (J9_ARE_ALL_BITS_SET(vm->checkpointState.flags, J9VM_CRIU_IS_CHECKPOINT_ENABLED)) {
+				vm->checkpointState.flags |= J9VM_CRIU_DISABLE_CRIU_SEC_PROVIDER;
+			}
+		}
+	}
+
+	{
 		IDATA enableCRIUNonPortableMode = FIND_AND_CONSUME_VMARG(EXACT_MATCH, VMOPT_XXENABLECRIUNONPORTABLEMODE, NULL);
 		IDATA disableCRIUNonPortableMode = FIND_AND_CONSUME_VMARG(EXACT_MATCH, VMOPT_XXDISABLECRIUNONPORTABLEMODE, NULL);
 		if (enableCRIUNonPortableMode >= disableCRIUNonPortableMode) {

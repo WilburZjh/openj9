@@ -518,6 +518,18 @@ BOOLEAN
 isCRIUSupportEnabled_VM(J9JavaVM *vm);
 
 /**
+ * @brief Queries if CRIU security provider needs to be disabled
+ * when CRIU support is enabled. By default support
+ * is not enabled, it can be enabled with `-XX:-CRIUSecProvider` 
+ * right after `-XX:+EnableCRIUSupport`
+ *
+ * @param currentThread vmthread token
+ * @return TRUE if enabled, FALSE otherwise
+ */
+BOOLEAN
+disableCRIUSecProvider(J9VMThread *currentThread);
+
+/**
  * @brief Queries if checkpointing is permitted. Note, when
  * -XX:+CRIURestoreNonPortableMode option is specified checkpointing
  * will not be permitted after the JVM has been restored from a checkpoint
