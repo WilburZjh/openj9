@@ -34,6 +34,11 @@ public final class InternalCRIUSupport {
 
 	private static native boolean isCRIUSupportEnabledImpl();
 	private static native boolean isCheckpointAllowedImpl();
+<<<<<<< HEAD
+	private static native boolean isEnableFullSecurityEnvInCRIUImpl();
+=======
+	private static native boolean disableCRIUSecProviderImpl();
+>>>>>>> 0f3c3e67b (Enable -XX:-CRIUSecProvider JVM option)
 	private static native long getCheckpointRestoreNanoTimeDeltaImpl();
 	private static native long getLastRestoreTimeImpl();
 
@@ -68,6 +73,20 @@ public final class InternalCRIUSupport {
 	 */
 	public synchronized static boolean isCRIUSupportEnabled() {
 		return criuSupportEnabled;
+	}
+
+	/**
+	 * Queries if CRIU Security provider needs to be disabled 
+	 * when CRIU support is enabled.
+	 *
+	 * @return true if needed, false otherwise
+	 */
+	public synchronized static boolean disableCRIUSecProvider() {
+		boolean isCRIUSecProviderDisabled = false;
+		if (criuSupportEnabled) {
+			isCRIUSecProviderDisabled = disableCRIUSecProviderImpl();
+		}
+		return isCRIUSecProviderDisabled;
 	}
 
 	/**

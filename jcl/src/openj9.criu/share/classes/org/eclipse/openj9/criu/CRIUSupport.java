@@ -204,6 +204,16 @@ public final class CRIUSupport {
 	}
 
 	/**
+	 * Queries if CRIU Checkpoint is allowed. With -XX:-CRIUSecProvider
+	 * requires full providers back.
+	 *
+	 * @return TRUE if support is enabled and the library is loaded, FALSE otherwise
+	 */
+	public static boolean disableCRIUSecProvider() {
+		return InternalCRIUSupport.disableCRIUSecProvider();
+	}
+
+	/**
 	 * Queries if CRIU Checkpoint is allowed. With -XX:+CRIURestoreNonPortableMode enabled
 	 * (default policy) only a single checkpoint is allowed.
 	 *

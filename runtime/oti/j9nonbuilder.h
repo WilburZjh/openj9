@@ -4201,10 +4201,12 @@ typedef struct J9DelayedLockingOpertionsRecord {
 
 #define J9VM_CRIU_IS_CHECKPOINT_ENABLED 0x1
 #define J9VM_CRIU_IS_CHECKPOINT_ALLOWED 0x2
+#define J9VM_CRIU_IS_FULL_SECURITY_ENV_ENABLED 0x3
 #define J9VM_CRIU_IS_NON_PORTABLE_RESTORE_MODE 0x4
 #define J9VM_CRIU_IS_JDWP_ENABLED 0x8
 #define J9VM_CRIU_IS_THROW_ON_DELAYED_CHECKPOINT_ENABLED 0x10
 #define J9VM_CRIU_IS_PORTABLE_JVM_RESTORE_MODE 0x20
+#define J9VM_CRIU_DISABLE_CRIU_SEC_PROVIDER 0x40
 
 typedef struct J9CRIUCheckpointState {
 	U_32 flags;
@@ -5025,6 +5027,7 @@ typedef struct J9InternalVMFunctions {
 	BOOLEAN (*jvmRestoreHooks)(struct J9VMThread *currentThread);
 	BOOLEAN (*isCRIUSupportEnabled)(struct J9VMThread *currentThread);
 	BOOLEAN (*isCRIUSupportEnabled_VM)(struct J9JavaVM *vm);
+	BOOLEAN (*disableCRIUSecProvider)(struct J9VMThread *currentThread);
 	BOOLEAN (*isCheckpointAllowed)(struct J9VMThread *currentThread);
 	BOOLEAN (*isNonPortableRestoreMode)(struct J9VMThread *currentThread);
 	BOOLEAN (*isJVMInPortableRestoreMode)(struct J9VMThread *currentThread);

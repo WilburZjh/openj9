@@ -1303,6 +1303,9 @@ Java_openj9_internal_criu_InternalCRIUSupport_isCheckpointAllowedImpl(JNIEnv *en
 
 jboolean JNICALL
 Java_openj9_internal_criu_InternalCRIUSupport_isCRIUSupportEnabledImpl(JNIEnv *env, jclass unused);
+
+jboolean JNICALL
+Java_openj9_internal_criu_InternalCRIUSupport_disableCRIUSecProviderImpl(JNIEnv *env, jclass unused);
 #endif /* defined(J9VM_OPT_CRIU_SUPPORT) */
 
 #if JAVA_SPEC_VERSION >= 19

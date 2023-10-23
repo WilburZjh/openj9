@@ -674,6 +674,7 @@ if(J9VM_OPT_CRIU_SUPPORT)
 		Java_openj9_internal_criu_InternalCRIUSupport_getLastRestoreTimeImpl
 		Java_openj9_internal_criu_InternalCRIUSupport_isCheckpointAllowedImpl
 		Java_openj9_internal_criu_InternalCRIUSupport_isCRIUSupportEnabledImpl
+		Java_openj9_internal_criu_InternalCRIUSupport_disableCRIUSecProviderImpl
 	)
 endif()
 
